@@ -1,5 +1,5 @@
 <template>
-    <draggable class="list-group" element="ul" v-model="taskList" :options="dragOptions" :move="onMove"
+    <draggable class="list-group task-list" element="ul" v-model="taskList" :options="dragOptions" :move="onMove"
                @start="isDragging=true" @end="isDragging=false">
         <li class="list-group-item" v-for="(task, index) in taskList" :key="task.id">
             <span>{{task.name}}</span>
@@ -85,5 +85,9 @@
 
     .list-group-item i {
         cursor: pointer;
+    }
+
+    .task-list{
+        height: calc(100% - 20px);
     }
 </style>

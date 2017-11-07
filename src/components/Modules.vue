@@ -1,24 +1,25 @@
 <template>
-    <div class="fluid container">
-        <draggable class="list-group" element="ul" v-model="moduleList" :options="dragOptions" :move="onMove"
+    <div class="container">
+        <draggable class="module-list" element="ul" v-model="moduleList" :options="dragOptions" :move="onMove"
                    @start="isDragging=true" @end="isDragging=false">
-            <li class="list-group-item" v-for="(module, index) in moduleList" :key="module.id">
-                <div class="row">
-                    <div class="list-group col-sm-3">{{module.name}}</div>
-                    <div class="list-group col-sm-3">
+            <li class="module-item" v-for="(module, index) in moduleList" :key="module.id">
+                <el-row :gutter="10" class="module">
+                    <el-col :sm="6" class="module-tasks">
+                        <moduleCard :module="module"></moduleCard>
+                    </el-col>
+                    <el-col :sm="6" class="module-tasks">
                         <div>todo</div>
                         <tasks :tasks="module.todo" :moduleId="module.id" :type="'todo'"></tasks>
-                    </div>
-                    <div class="list-group col-sm-3">
+                    </el-col>
+                    <el-col :sm="6" class="module-tasks">
                         <div>doing</div>
                         <tasks :tasks="module.doing" :moduleId="module.id" :type="'doing'"></tasks>
-                    </div>
-                    <div class="list-group col-sm-3">
+                    </el-col>
+                    <el-col :sm="6" class="module-tasks">
                         <div>done</div>
                         <tasks :tasks="module.done" :moduleId="module.id" :type="'done'"></tasks>
-                    </div>
-
-                </div>
+                    </el-col>
+                </el-row>
             </li>
         </draggable>
     </div>
@@ -29,11 +30,13 @@
     import {mapState} from 'vuex'
     import moduleService from '../biz/api/ModuleService'
     import tasks from './Tasks.vue'
+    import moduleCard from './Modules/ModuleCard.vue'
 
     export default {
         components: {
             draggable,
-            tasks
+            tasks,
+            moduleCard
         },
         data () {
             return {
@@ -88,26 +91,53 @@
     }
 </script>
 
-<style>
+<style lang="scss" scoped>
+    .container{
+        width: 100%;
 
-    .no-move {
-        transition: transform 0s;
+        & >>> .no-move {
+            transition: transform 0s;
+        }
+
+        & >>> .ghost {
+            opacity: .5;
+            background: #C8EBFB;
+        }
     }
 
-    .ghost {
-        opacity: .5;
-        background: #C8EBFB;
+    .module-list {
+        box-sizing : border-box ;
+        margin: 0px ;
+        padding: 0px ;
+        list-style: none;
+    }
+    .module-item {
+        box-sizing : border-box ;
+        position : relative ;
+        display : block ;
+        padding : 10px 15px ;
+        margin-bottom : -1px ;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        box-shadow: 0 0 3px 1px #eee;
+        margin-bottom: 20px;
     }
 
-    .list-group {
-        min-height: 20px;
+    .module{
+
     }
 
-    .list-group-item {
+    .module-tasks {
         cursor: move;
     }
 
-    .list-group-item i {
+    .module-tasks i {
         cursor: pointer;
+    }
+</style>
+<style scoped>
+    .module{
+        display: flex;
     }
 </style>

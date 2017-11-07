@@ -4,7 +4,7 @@
 </template>
 
 <script>
-    import Modules from '../components/Modules.vue'
+    import Modules from '../../components/Modules.vue'
 
     export default {
         components: {

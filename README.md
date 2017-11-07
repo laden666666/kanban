@@ -1,4 +1,4 @@
-# my-kanban
+npm# my-kanban
 
 > A Vue.js project
 
