@@ -4,20 +4,17 @@
                    @start="isDragging=true" @end="isDragging=false">
             <li class="module-item" v-for="(module, index) in moduleList" :key="module.id">
                 <el-row :gutter="10" class="module">
-                    <el-col :sm="6" class="module-tasks">
+                    <el-col :md="6" class="module-tasks">
                         <moduleCard :module="module"></moduleCard>
                     </el-col>
-                    <el-col :sm="6" class="module-tasks">
-                        <div>todo</div>
-                        <tasks :tasks="module.todo" :moduleId="module.id" :type="'todo'"></tasks>
+                    <el-col :md="6" class="module-tasks">
+                        <tasks name="todo" :tasks="module.todo" :moduleId="module.id" :type="'todo'"></tasks>
                     </el-col>
-                    <el-col :sm="6" class="module-tasks">
-                        <div>doing</div>
-                        <tasks :tasks="module.doing" :moduleId="module.id" :type="'doing'"></tasks>
+                    <el-col :md="6" class="module-tasks">
+                        <tasks name="doing" :tasks="module.doing" :moduleId="module.id" :type="'doing'"></tasks>
                     </el-col>
-                    <el-col :sm="6" class="module-tasks">
-                        <div>done</div>
-                        <tasks :tasks="module.done" :moduleId="module.id" :type="'done'"></tasks>
+                    <el-col :md="6" class="module-tasks">
+                        <tasks name="done" :tasks="module.done" :moduleId="module.id" :type="'done'"></tasks>
                     </el-col>
                 </el-row>
             </li>
@@ -115,17 +112,13 @@
         box-sizing : border-box ;
         position : relative ;
         display : block ;
-        padding : 10px 15px ;
-        margin-bottom : -1px ;
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 3px;
-        box-shadow: 0 0 3px 1px #eee;
+        padding : 0 0 20px;
         margin-bottom: 20px;
+        border-bottom: 1px solid #999;
     }
 
     .module{
-
+        display: flex;
     }
 
     .module-tasks {
@@ -134,10 +127,5 @@
 
     .module-tasks i {
         cursor: pointer;
-    }
-</style>
-<style scoped>
-    .module{
-        display: flex;
     }
 </style>
